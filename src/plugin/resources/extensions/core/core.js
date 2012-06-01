@@ -379,7 +379,11 @@ Components.utils.import("resource://gre/modules/AddonManager.jsm");
 				    outputStream.close();
 			    }
 			    this.log.info("saved " + file.path);
-			    testCase.lastModifiedTime = file.lastModifiedTime;
+                try {
+			        testCase.lastModifiedTime = file.lastModifiedTime;
+                }catch(err) {
+                    // ignore as lastmodifited time of new files is not relevant and that does cause NS_ERROR_FILE_TARGET_DOES_NOT_EXIST
+                }
 			    testCase.clearModified();
 			    
 			    return true;

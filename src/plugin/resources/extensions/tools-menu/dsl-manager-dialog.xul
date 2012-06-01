@@ -7,8 +7,8 @@
 %seleniumIdeDTD;
 ]>
 
-<dialog id="locator-dialog"
-  title="Locators"
+<dialog id="dsl-dialog"
+  title="DSLManager"
   buttons="accept,cancel"
   ondialogaccept="return DSLManagerDialog.acceptChanges();"
   ondialogcancel="return DSLManagerDialog.cancelChanges();"
@@ -16,9 +16,19 @@
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="chrome://brightest-ide-extensions/content/tools-menu/dslManagerDialog.js"/>
   <vbox flex="1">
-    <description>Modify the dsl commands and press ok to save
+    <description>Modify the dsl commands and press ok to save</description>
+    <label value="" id="error-label"/>
     <hbox>
-      <listbox id="dslBuilder-list" flex="1"/>
+      <listbox id="dslBuilder-list" flex="1" editable="true" />
+    </hbox>
+    <hbox>
+      <listbox id="command-list" flex="1">
+         <listhead>
+            <listheader label="Command" />
+            <listheader label="Target"/>
+            <listheader label="Value" />
+          </listhead>
+      </listbox>  
     </hbox>
   </vbox>
 </dialog>
