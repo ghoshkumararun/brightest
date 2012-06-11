@@ -42,7 +42,6 @@
 			<path refid="compile.class.path" />
 			<path location="${core.classes.dir}" />
 			<path location="${core.resources.dir}" />
-			<path location="{lib.dir}" />
 		</path>
 
 		<mkdir dir="${core.test.classes.dir}" />
@@ -161,6 +160,7 @@
 			<classpath refid="run.class.path">
 			</classpath>
 			<sysproperty key="brightest.configuration.file" value="./demo/demo.properties" />
+			<sysproperty key="webdriver.chrome.driver" value="./wip/chrome-driver/chromedriver" />
 			<formatter type="xml" />
 			<test name="com.imaginea.brightest.junit.JUnitTestSuiteAdapter">
 			</test>

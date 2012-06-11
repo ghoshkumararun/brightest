@@ -1,0 +1,51 @@
+Scope
+======
+A simple getting started guide, talks about how to build it,  install the recorder and how to run it.
+
+
+Usage
+=====
+Use ant for building the tool. The target "all" would create the xpi (brightest.xpi) and the jar (brightest-core.jar) in in the dist folder. 
+
+The recorder can be installed on firefox, using standart xpi mechanism. Open the xpi file in firefox, it will To install the xpi, open the xpi file in firefox. It will prompt to install it from this location. Click ok to install, restart firefox. Navigate to View->Sidebar->BrighTest IDE. This would open the ide. We can configure a dsl location to store all the composite commands.
+
+To run the recorded tests in standalone mode, run the run-unit target in the ant build file. By default it points to demo.properties and executes all tests present in the folder pointed to by the testPath. For example by default it will execute all the tests present in xls folder under demo folder. We can change the properties file in the ant build file by pointing to some other value in brightest.configuration.file.
+
+TroubleShooting
+==================
+1. Working with chrome
+We must configure the webdriver.chrome.driver location in run-unit task, add a line like
+			<sysproperty key="webdriver.chrome.driver" value="/host/projects/imaginea-git/brightest/wip/chrome-driver/chromedriver" />
+
+2. Changing the browse for standalone run
+Change the browser property in the properties file pointed to by brightest.configuration.file . The valid browser values are internet explorer, chrome, firefox
+
+
+DSL Support
+===========
+BrighTest allows grouping selenium commands together as a single command. This command can have a meaningful name like createOrder or login and can be used across tests in BrighTest. 
+
+To create a DSL command in the recorder, multi-select the constituent commands, right click, and select "Add New DSL" from the pop up menu. This should bring up a dialog prompt where the new command name can be typed in.  We must provide a location to store the dsl file via Options->Options...->DSL Location. This is the location where all dsl commands are stored in JSON format. We must use this dsl location as the value for dslPath in the properties file (brightest.configuration.file) used for stand-alone run.
+
+We can view the details of the command using the "Show DSL Manager" menu item under Tools menu. This should list the current DSL commands, selecting any DSL command would display the constituent commands.
+
+FAQ
+=========
+
+1. Not running with firefox version X ?
+The default selenium core supports till ff 8, the current selenium core support till ff 11. Upgrade the selenium server and java library present in lib folder. The build script uses all jars present in the lib folder.
+
+2. Which properties file does the standalone driver use?
+BrighTest uses the file pointed to by the system property brightest.configuration.file. The run-unit ant target sets this value in the target using sysproperty to demo.properties, we can use any other file instead of this properties file.
+
+3. How do I provide the dsl file to stand-alone runner?
+The properties file used by standalone runner has a key called dslPath, this can point to the actual location of the file containing the dsl commands.
+
+4. How do I externalize the locators?
+BrighTest supports reading properties files to resolve the locators in standalone mode. The properties file can be supplied using the configurationPath in the xyz.properties file (file pointed to by the system property brightest.configuration.file). This property can take multiple files with path separators, for example it can have a value like ./pages/login.properties;./pages/orderMgmt.properties. The framework is smart enough to split on basis of the path separator ( : for unix and ; for windows). We can also override values in one properties file with another, with the property values defined in first file taking precedence over the next ones.
+
+5. How do I reference externalized locators?
+Use the keyname in the tests. For example to reference the value associated with key login.button.location in the test use 
+ click login.button.location
+If this key is present in any of the properties file supplied via the configurationPath property, it will be used at runtime.
+

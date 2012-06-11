@@ -4,7 +4,7 @@
         "commands": [
             {
                 "command": "open",
-                "target": "http://localhost:8080",
+                "target": "http://localhost:8080/mViewer",
                 "value": "",
                 "skip": 560,
                 "index": 560,
@@ -44,7 +44,7 @@
         "commands": [
             {
                 "command": "open",
-                "target": "http://localhost:8080/index.html",
+                "target": "http://localhost:8080/mViewer",
                 "value": "",
                 "type": "command"
             },
@@ -60,6 +60,36 @@
     {
         "name": "waitWithAjaxForElement",
         "commands": [
+            {
+                "command": "waitForAjaxResponse",
+                "target": "30000",
+                "value": "",
+                "type": "command"
+            },
+            {
+                "command": "waitForElementPresent",
+                "target": "id=test",
+                "value": "",
+                "type": "command"
+            }
+        ],
+        "counter": -1
+    },
+    {
+        "name": "loginAlt",
+        "commands": [
+            {
+                "command": "open",
+                "target": "http://localhost:8080/mViewer",
+                "value": "",
+                "type": "command"
+            },
+            {
+                "command": "clickForAjaxResponse",
+                "target": "//button[@id='login']",
+                "value": "",
+                "type": "command"
+            },
             {
                 "command": "waitForAjaxResponse",
                 "target": "30000",

@@ -17,4 +17,15 @@ public class UserExtensionHandler {
             e.printStackTrace();
         }
     }
+
+	@CommandInfo
+	public void typeForAjaxResponse(ExecutionContext context, Command command) {
+		context.getSelenium().type(command.getRuntimeArgument(), command.getRuntimeOptionalArgument());
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
